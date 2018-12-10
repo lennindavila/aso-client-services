@@ -46,11 +46,11 @@
 		<module>paas_createrqcardstampingorders</module>
 		<module>paas_createcardstampingorders</module>
 		<module>paas_session</module>
-    <module>gifole</module>
-    <module>paas_modifycardpin</module>
-    <module>paas_userprofile</module>
-    <module>paas_modifyCardBlock</module>
-    <module>encriptacion</module>
-    <module>biometricclient</module>
+		<module>gifole</module>
+		<module>paas_modifycardpin</module>
+		<module>paas_userprofile</module>
+		<module>paas_modifyCardBlock</module>
+		<module>encriptacion</module>
+		<module>biometricclient</module>
   </modules>
 </project>
