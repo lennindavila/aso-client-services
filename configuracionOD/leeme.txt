@@ -1,0 +1,3 @@
+1. copiar la carpeta "configuracionOD" en C
+2. copiar el archivo "Start Eclipse.bat" en el directorio del eclipse y crear un acceso directo en escritorio, 
+   en adelante usar este acceso directo  para iniciar el eclipse

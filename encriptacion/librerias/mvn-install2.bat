@@ -1,0 +1,1 @@
+mvn install:install-file "-Dfile=.\libmcrypt-jar-1.5.1.jar" "-DgroupId=com.bbva.sl.ar.java" "-DartifactId=libmcrypt-jar" "-Dversion=1.5.1" "-Dpackaging=jar"

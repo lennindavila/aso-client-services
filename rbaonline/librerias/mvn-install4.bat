@@ -1,0 +1,1 @@
+mvn install:install-file "-Dfile=.\lib\gimap.jar" "-DgroupId=com.sun.mail" "-DartifactId=gimap" "-Dversion=1.4.6" "-Dpackaging=jar"

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>pe.bbva.aso.servicios.cliente</groupId>
+	<artifactId>aso_servicios_cliente</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.6</java.version>
+		<springframework.version>4.1.6.RELEASE</springframework.version>
+		<scope.version>compile</scope.version>
+	</properties>
+
+	<modules>
+		<module>listaclientes</module>
+		<module>base</module>
+		<module>obtenerClienteReniec</module>
+		<module>paas_listcontactsdetail</module>
+		<module>paas_createcontactdetail</module>
+		<module>paas_getdigitalaffiliation</module>
+		<module>paas_financialdashboard</module>
+		<module>paas_createsecurecontact</module>
+		<module>paas_createcustomerterm</module>
+		<module>paas_createaccount</module>
+		<module>paas_getcustomerterm</module>
+		<module>paas_listcards</module>
+		<module>paas_modifyindicator</module>
+		<module>paas_listcatalogs</module>
+		<module>paas_createcard</module>
+		<module>paas_createcustomer</module>
+		<module>paas_listaccounts</module>
+		<module>paas_createchannelinformation</module>
+		<module>paas_createcardrelatedcontract</module>
+		<module>paas_createaccountrelatedcontract</module>
+		<module>paas_createcredentialsenrollments</module>
+		<module>paas_modifycardactivation</module>
+		<module>rbaonline</module>
+		<module>paas_grantingticket</module>
+		<module>paas_getbankpositiondashboard</module>
+		<module>motordigitalizacion</module>
+		<module>paas_listcustomerindicators</module>
+		<module>paas_modifycard</module>
+		<module>paas_modifycontactdetail</module>
+		<module>paas_createrqcardstampingorders</module>
+		<module>paas_createcardstampingorders</module>
+		<module>paas_session</module>
+    <module>gifole</module>
+    <module>paas_modifycardpin</module>
+    <module>paas_userprofile</module>
+    <module>paas_modifyCardBlock</module>
+    <module>encriptacion</module>
+    <module>biometricclient</module>
+  </modules>
+</project>

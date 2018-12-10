@@ -1,0 +1,1 @@
+mvn install:install-file "-Dfile=.\lib\dsn.jar" "-DgroupId=com.sun.mail" "-DartifactId=dsn" "-Dversion=1.4.6" "-Dpackaging=jar"

@@ -1,0 +1,16 @@
+.settings/
+target/
+.project
+.classpath
+/.metadata/
+/.recommenders/
+/build
+/RemoteSystemsTempFiles/
+*/pom.properties
+/pom.properties/
+/pom.properties
+pom.properties/
+/MANIFEST.MF
+/MANIFEST.MF/
+MANIFEST.MF/
+/.settings/

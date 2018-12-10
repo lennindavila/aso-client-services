@@ -1,0 +1,1 @@
+Ejecutar con doble clic en "install.bat" para registrar en el maven los jar necesarios para rba

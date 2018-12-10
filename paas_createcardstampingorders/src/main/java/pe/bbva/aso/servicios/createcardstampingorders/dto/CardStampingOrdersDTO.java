@@ -1,0 +1,63 @@
+package pe.bbva.aso.servicios.createcardstampingorders.dto;
+
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class CardStampingOrdersDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@JsonProperty("id")
+	private String id;
+
+	@JsonProperty("bank")
+	private BankDTO bank;
+
+	@JsonProperty("atm")
+	private AtmDTO atm;
+
+	@JsonProperty("card")
+	private CardDTO card;
+
+	@JsonProperty("finalStatus")
+	private FinalStatusDTO finalStatus;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	public BankDTO getBank() {
+		return bank;
+	}
+
+	public void setBank(BankDTO bank) {
+		this.bank = bank;
+	}
+	public AtmDTO getAtm() {
+		return atm;
+	}
+
+	public void setAtm(AtmDTO atm) {
+		this.atm = atm;
+	}
+	public CardDTO getCard() {
+		return card;
+	}
+
+	public void setCard(CardDTO card) {
+		this.card = card;
+	}
+	public FinalStatusDTO getFinalStatus() {
+		return finalStatus;
+	}
+
+	public void setFinalStatus(FinalStatusDTO finalStatus) {
+		this.finalStatus = finalStatus;
+	}
+}
+

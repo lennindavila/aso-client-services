@@ -1,0 +1,1 @@
+mvn install:install-file "-Dfile=.\lib\smtp.jar" "-DgroupId=com.sun.mail" "-DartifactId=smtp" "-Dversion=1.4.6" "-Dpackaging=jar"
