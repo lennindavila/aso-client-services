@@ -1,1 +1,0 @@
-mvn -Dhttps.protocols=TLSv1.2 clean install package -Dmaven.test.skip=true
