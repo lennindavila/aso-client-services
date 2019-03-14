@@ -14,12 +14,13 @@ public class TestCreateCredentialsEnrollmentsASOConfig {
 	@Test
 	public void consultar() {
 		String tsec = "";
+		String contactID = "OFIDIGPRI";
 		try {
 			tsec = new GrantingTicketASOConfig().obtenerTsec();
 		}catch(Exception e) {
 			tsec = "xxx";
 		}		
-		System.out.println("tsec "+ tsec);	 	
+		System.out.println("tsec "+ tsec);	 	 
 
 		CreateCredentialsEnrollmentsASOConfig obj = new CreateCredentialsEnrollmentsASOConfig();
 		RequestCredentialsEnrollments filtro = new RequestCredentialsEnrollments();
@@ -31,7 +32,7 @@ public class TestCreateCredentialsEnrollmentsASOConfig {
 		String data = null;
 
 		try {
-			response = obj.createCredentialEnrollment(filtro, tsec);
+			response = obj.createCredentialEnrollment(filtro, tsec, contactID);
 			if(response!=null) {
 				if(!response.hasError()) {
 					data = response.getConsumerRequestId();

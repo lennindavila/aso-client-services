@@ -30,9 +30,9 @@ public class ModifyCardBlockASOConfig extends ServiciosASOAutenticadoConfig {
 	public ResponseModifyCardBlock modifyCardBlock(RequestModifyCardBlock filtro,String tsec) throws ServiceExceptionBBVA {
 		logger.debug("ModifyCardBlockASOConfig modifyCardBlock: inicio");
 		ctx = new AnnotationConfigApplicationContext(ModifyCardBlockASOConfig.class);
-		ModifyCardBlockController modifyIndicatorController = ctx.getBean(ModifyCardBlockController.class);
-		logger.debug("ModifyCardBlockASOConfig modifyCardBlock: fin");
+		ModifyCardBlockController modifyIndicatorController = ctx.getBean(ModifyCardBlockController.class);		
 		ResponseModifyCardBlock respuesta = modifyIndicatorController.modifyCardBlock(filtro, tsec);
+		logger.debug("ModifyCardBlockASOConfig modifyCardBlock: fin");
 		return respuesta;
 	}
 }

@@ -13,7 +13,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -32,10 +35,14 @@ public class CreateRqCardStampingOrdersAPGRestClientImpl implements ICreateRqCar
 		
 	@Autowired
 	protected Environment env;
+	
+	private Gson json = new Gson();
 
 	@Override
 	public ResponseCreateRqCardStampingOrders createRqCardStampingOrders(RequestCreateRqCardStampingOrders filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("createRqCardStampingOrders :inicio");
+		logger.debug("CreateRqCardStampingOrdersAPGRestClientImpl createRqCardStampingOrders: inicio");
+		logger.debug("CreateRqCardStampingOrdersAPGRestClientImpl createRqCardStampingOrders: parameters request: " + json.toJson(filtro));
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.createrqcardstampingorders.url");		
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -51,9 +58,11 @@ public class CreateRqCardStampingOrdersAPGRestClientImpl implements ICreateRqCar
 					.exchange(pathServicio, HttpMethod.POST,
 							httpEntity, typeRef);			
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.CREATERQCARDSTAMPINGORDERS,e,e.getCodigo(),e.getMessage());
 		}
-		logger.debug("createRqCardStampingOrders :fin");
+		
+		logger.debug("CreateRqCardStampingOrdersAPGRestClientImpl createRqCardStampingOrders: parameters response: " + json.toJson(respuesta));
+		logger.debug("CreateRqCardStampingOrdersAPGRestClientImpl createRqCardStampingOrders: fin");
 		return respuesta.getBody();
 	}	
 }

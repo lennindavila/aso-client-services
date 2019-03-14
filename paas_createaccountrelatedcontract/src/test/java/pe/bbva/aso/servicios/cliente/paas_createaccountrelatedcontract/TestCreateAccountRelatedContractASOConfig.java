@@ -1,6 +1,6 @@
 package pe.bbva.aso.servicios.cliente.paas_createaccountrelatedcontract;
 
-//import org.junit.Test;
+import org.junit.Test;
 
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ValidacionExceptionBBVA;
@@ -13,7 +13,7 @@ import pe.bbva.aso.servicios.grantingticket.config.GrantingTicketASOConfig;
 
 public class TestCreateAccountRelatedContractASOConfig {
 
-	//@Test
+	@Test
 	public void consultar() {
 		String tsec = "";
 		try {
@@ -27,8 +27,13 @@ public class TestCreateAccountRelatedContractASOConfig {
 		RequestCreateAccountRelatedContract filtro = new RequestCreateAccountRelatedContract();
 		ProductDTO product = new ProductDTO();
 		product.setId("CARDS");
-		filtro.setContractId("4551709022482674");
+		//filtro.setContractId("4551709022482674");
 		filtro.setProduct(product);
+		filtro.setContractId("4551038221602662");
+		filtro.setAccountId("001108140200034371");
+		
+		//{"account-id":"001108140200034371","contractId":"4551038221602662","product":{"id":"CARDS"}}
+		//filtro.setProduct(product);
 
 		ResponseCreateAccountRelatedContract response = null;
 		AccountRelatedContractDTO data = null;

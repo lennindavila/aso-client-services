@@ -26,19 +26,23 @@ public class TestCreateContactDetailASOConfig {
 
 		CreateContactDetailASOConfig obj = new CreateContactDetailASOConfig();
 		RequestCreateContactDetail filtro = new RequestCreateContactDetail();
-		 filtro.setContact("ASDF@FFGF.COM");
+		 filtro.setContact("qwer1011_6@HOTMAIL.COM");
 		 ContactTypeDTO contactType = new ContactTypeDTO();
 		 contactType.setId("EMAIL");
 		 filtro.setContactType(contactType);
-		 filtro.setCustomerId("97169945");
+		 filtro.setCustomerId("97170208");
 		 filtro.setRegionalCode("");
 		 filtro.setExtension("");
-		 PhoneCompanyDTO phoneCompany = new PhoneCompanyDTO();
-		 phoneCompany.setId("B");
-		 filtro.setIsPreferential("false");
-		 //filtro.setIsChecked("true");
+		 //PhoneCompanyDTO phoneCompany = new PhoneCompanyDTO();
+		 //phoneCompany.setId("B");
+		 filtro.setIsPreferential("true");
+		 filtro.setIsChecked("true");
 		 //filtro.setPhoneCompany(phoneCompany);
 		
+		// {"customer-id":"97170208",
+		//"contact":"qwer1011_4@HOTMAIL.COM",
+		//"contactType":{"id":"EMAIL"},"regionalCode":"","extension":"","phoneCompany":null,"isPreferential":"true","isChecked":null}
+		 
 		 ResponseCreateContactDetail response = null;
 		 ContactDetailDTO data = null;
 

@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -34,11 +37,14 @@ public class BiometricClientAPGRestClientImpl implements IBiometricClientAPGRest
 	private CustomRestTemplate restTemplateAutenticado;
 	
 	@Autowired
-	protected Environment env;	
+	protected Environment env;
+	
+	private Gson json = new Gson();
 
 	@Override
 	public AuthenticateResponse obtenerBiometrico(AuthenticateRequest request) throws ServiceExceptionBBVA {
-		logger.debug("BiometricClientAPGRestClientImpl obtenerBiometrico :inicio ");
+		logger.debug("BiometricClientAPGRestClientImpl obtenerBiometrico: inicio ");
+		logger.debug("BiometricClientAPGRestClientImpl obtenerBiometrico: parameters request: " + json.toJson(request));
 		
 		String pathServicio = env.getProperty("servicio.rest.biometrico.url");		
 		logger.info("pathServicio " + pathServicio);
@@ -55,9 +61,10 @@ public class BiometricClientAPGRestClientImpl implements IBiometricClientAPGRest
 					.exchange(pathServicio, HttpMethod.POST,
 							httpEntity, typeRef);			
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicio");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.BIOMETRICCLIENT,e,e.getCodigo(),e.getMessage());
 		}
-		logger.debug("BiometricClientAPGRestClientImpl obtenerBiometrico :fin ");
+		logger.debug("BiometricClientAPGRestClientImpl obtenerBiometrico: parameters response: " + json.toJson(respuesta));
+		logger.debug("BiometricClientAPGRestClientImpl obtenerBiometrico: fin");
 		return respuesta.getBody();
 	}
 	

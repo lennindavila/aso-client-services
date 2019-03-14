@@ -22,7 +22,7 @@ public class TestGrantingTicketASOConfig {
 	 authenticationDTO.setAuthenticationType("02");
 	 AuthenticationDataDTO authenticationDataDTO = new AuthenticationDataDTO();
 	 List<String> listAuthenticationData = new ArrayList<String>();
-	 listAuthenticationData.add("gestion12");
+	 listAuthenticationData.add("gestion11");//gestion11 
 	 authenticationDataDTO.setAuthenticationData(listAuthenticationData);
 	 authenticationDataDTO.setIdAuthenticationData("password");
 	 List<AuthenticationDataDTO> listauthenticationDataDTO= new ArrayList<AuthenticationDataDTO>();

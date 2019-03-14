@@ -31,7 +31,8 @@ public class ListCustomerIndicatorsASOConfig extends ServiciosASOAutenticadoConf
 		logger.debug("ListCustomerIndicatorsASOConfig listCustomerIndicators: inicio");
 		ctx = new AnnotationConfigApplicationContext(ListCustomerIndicatorsASOConfig.class);
 		ListCustomerIndicatorsController listCustomerIndicatorsController = ctx.getBean(ListCustomerIndicatorsController.class);
+		ResponseCustomerIndicators response = listCustomerIndicatorsController.listCustomerIndicators(filtro, tsec);
 		logger.debug("ListCustomerIndicatorsASOConfig listCustomerIndicators: fin");
-		return listCustomerIndicatorsController.listCustomerIndicators(filtro, tsec);
+		return response;
 	}
 }

@@ -52,5 +52,7 @@
     <module>paas_modifyCardBlock</module>
     <module>encriptacion</module>
     <module>biometricclient</module>
+    <module>paas_modifycustomerterm</module>
+    <module>PDFViewer</module>
   </modules>
 </project>

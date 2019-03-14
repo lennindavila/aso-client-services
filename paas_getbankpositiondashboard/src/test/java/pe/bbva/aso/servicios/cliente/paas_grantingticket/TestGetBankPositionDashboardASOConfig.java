@@ -1,6 +1,6 @@
 package pe.bbva.aso.servicios.cliente.paas_grantingticket;
 
-//import org.junit.Test;
+import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
@@ -17,7 +17,7 @@ import pe.bbva.aso.servicios.grantingticket.config.GrantingTicketASOConfig;
 public class TestGetBankPositionDashboardASOConfig {
 	final static Logger logger = (Logger) LoggerFactory.getLogger(TestGetBankPositionDashboardASOConfig.class);
 
-   // @Test
+   @Test
 	public void consultar() {
 		String tsec = "xxx";
 		try {
@@ -30,7 +30,7 @@ public class TestGetBankPositionDashboardASOConfig {
 		GetBankPositionDashboardASOConfig obj = new GetBankPositionDashboardASOConfig();
 		RequestGetBankPositionDashboard filtro = new RequestGetBankPositionDashboard();
 		
-		filtro.setCustomerId("90025131");
+		filtro.setCustomerId("97163072"); //90025131  97163086
 		//filtro.setDocumentId("42633441");
 		//filtro.setDocumentType("DNI");
 		

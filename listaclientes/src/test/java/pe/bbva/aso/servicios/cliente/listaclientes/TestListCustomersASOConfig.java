@@ -2,10 +2,11 @@ package pe.bbva.aso.servicios.cliente.listaclientes;
 
 import java.util.List;
 
-//import org.junit.Test;
+import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.exception.ExceptionUtil;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ValidacionExceptionBBVA;
 import pe.bbva.aso.servicios.grantingticket.config.GrantingTicketASOConfig;
@@ -17,20 +18,20 @@ import pe.bbva.aso.servicios.listaclientes.dto.ResponseListCustomers;
 public class TestListCustomersASOConfig {
 	final static Logger logger = (Logger) LoggerFactory.getLogger(TestListCustomersASOConfig.class);
 	
-	//@Test
+@Test
 	public void consultar() {
 		logger.info("TestListCustomersASOConfig consultar - inicio: ");
-		String tsec = "";
+		String tsec = ""; 
 		try {
 			tsec = new GrantingTicketASOConfig().obtenerTsec();
 		}catch(Exception e) {
 			tsec = "xxx";
-		}		
-		System.out.println("tsec "+ tsec);	 
+		} 
+		logger.info("tsec "+ tsec);		 
 
 		ListCustomersASOConfig obj = new ListCustomersASOConfig();
 		RequestListCustomers filtro = new RequestListCustomers();
-		filtro.setDocumentNumber("42633441");
+		filtro.setDocumentNumber("47260019");//  47260025
 		filtro.setDocumentTypeId("DNI");
 		//filtro.setCustomer(new CustomerDTO());		 
 

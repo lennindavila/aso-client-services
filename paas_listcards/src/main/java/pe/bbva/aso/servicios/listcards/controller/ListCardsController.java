@@ -29,7 +29,7 @@ public class ListCardsController  extends BaseController {
 
 	@Override
 	ResponseListCards ejecutar(RequestListCards filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("ejecutar: inicio");
+		logger.debug("ListCardsController ejecutar: inicio");
 		//Este Servicio no tiene parametros obligatorios
 		/*		
 		Errors errores = new BindException(filtro, filtro.getClass().getName());
@@ -41,7 +41,7 @@ public class ListCardsController  extends BaseController {
 		}
 		*/
 		ResponseListCards response = this.listCardsService.listCards(filtro, tsec);
-		logger.debug("ejecutar: fin");
+		logger.debug("ListCardsController ejecutar: fin");
 		return response;
 	}
 }

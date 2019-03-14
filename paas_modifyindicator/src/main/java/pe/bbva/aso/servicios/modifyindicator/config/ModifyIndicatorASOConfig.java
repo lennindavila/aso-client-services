@@ -31,7 +31,8 @@ public class ModifyIndicatorASOConfig extends ServiciosASOAutenticadoConfig {
 		logger.debug("ModifyIndicatorASOConfig modifyIndicator: inicio");
 		ctx = new AnnotationConfigApplicationContext(ModifyIndicatorASOConfig.class);
 		ModifyIndicatorController modifyIndicatorController = ctx.getBean(ModifyIndicatorController.class);
+		ResponseModifyIndicator response = modifyIndicatorController.modifyIndicator(filtro, tsec);
 		logger.debug("ModifyIndicatorASOConfig modifyIndicator: fin");
-		return modifyIndicatorController.modifyIndicator(filtro, tsec);
+		return response;
 	}
 }

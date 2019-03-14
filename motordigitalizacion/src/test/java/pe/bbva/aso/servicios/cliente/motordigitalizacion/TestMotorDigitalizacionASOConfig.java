@@ -20,7 +20,7 @@ public class TestMotorDigitalizacionASOConfig {
 		ConstantesFileUnico constanttito = null;
 		request.setNumeroContrato("001101910200324020");
 		request.setIdContrato("020009");
-		request.setOficinaGestora("0130");
+		request.setOficinaGestora("0486");
 		request.setIdGrupo("2");
 		request.setProcedencia("NA");
 		request.setGestDoc("online");
@@ -32,7 +32,7 @@ public class TestMotorDigitalizacionASOConfig {
 		
 		List<RequestListCliente> lst = new ArrayList<RequestListCliente>();
 		RequestListCliente ocli = new RequestListCliente();
-		ocli.setEmail("jjtijero63@gmail.com");
+		ocli.setEmail("lennin.davila@gmail.com");
 		ocli.setTipoDocumento("L");
 		ocli.setCodigoCentral("90018919");
 		ocli.setNroDocumento("47550160");
@@ -46,7 +46,7 @@ public class TestMotorDigitalizacionASOConfig {
 		itemCliente.setFu_cfg_numero_documento_primer_titular("43590095");
 		itemCliente.setFu_cfg_nombre_completo_participe("EDDY REYES ESPIRILLA");
 		itemCliente.setFu_cfg_codigo_central_primer_titular("90016482");
-		itemCliente.setFu_cfg_email_primer_titular("HENRY.PAZ@GMAIL.COM");
+		itemCliente.setFu_cfg_email_primer_titular("lennin.davila@gmail.com");
 		itemCliente.setFu_sol_nacionalidad("PER");
 		lstItemsCliente.add(itemCliente);
 		ocli.setListaItems(lstItemsCliente);

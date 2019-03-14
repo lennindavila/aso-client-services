@@ -1,1 +1,2 @@
-Ejecutar con doble clic en "install.bat" para registrar en el maven los jar necesarios para rba
+En windows: Ejecutar con doble clic en "install-win.bat" para registrar en el maven los jar necesarios para rba
+En mac os x: Ejecutar con doble clic en "install-mac.sh" para registrar en el maven los jar necesarios para rba

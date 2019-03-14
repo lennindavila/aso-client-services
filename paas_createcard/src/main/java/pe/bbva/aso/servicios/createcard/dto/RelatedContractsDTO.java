@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class RelatedContractsDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@JsonProperty("relatedContract")
+	/*@JsonProperty("relatedContract")
 	private RelatedContractDTO relatedContract;
 
 	public RelatedContractDTO getRelatedContract() {
@@ -19,6 +19,31 @@ public class RelatedContractsDTO implements Serializable {
 
 	public void setRelatedContract(RelatedContractDTO relatedContract) {
 		this.relatedContract = relatedContract;
+	}*/
+	
+	@JsonProperty("relationType")
+	private RelationTypeDTO relationType;
+
+	@JsonProperty("contractId")
+	private String contractId;
+
+	public RelationTypeDTO getRelationType() {
+		return relationType;
 	}
+
+	public void setRelationType(RelationTypeDTO relationType) {
+		this.relationType = relationType;
+	}
+
+	public String getContractId() {
+		return contractId;
+	}
+
+	public void setContractId(String contractId) {
+		this.contractId = contractId;
+	}
+	
+	
+	
 }
 

@@ -1,0 +1,1 @@
+mvn install:install-file "-Dfile=./lib/pop3.jar" "-DgroupId=javax.mail" "-DartifactId=pop3" "-Dversion=1.4.6" "-Dpackaging=jar"

@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -36,9 +39,13 @@ public class ListCatalogsAPGRestClientImpl implements IListCatalogsAPGRestClient
 	@Autowired
 	protected Environment env;
 
+	private Gson json = new Gson();
+	
 	@Override
 	public ResponseListCatalogs listCatalogs(RequestListCatalogs filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("listCatalogs :inicio");
+		logger.debug("ListCatalogsAPGRestClientImpl listCatalogs :inicio");
+		logger.debug("ListCatalogsAPGRestClientImpl listCatalogs: parameters request: " + json.toJson(filtro));
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.listcatalogs.url");
 		Map<String, String> parametrosUrl = new HashMap<String, String>();
 		parametrosUrl.put("catalogId", filtro.getCatalogId());
@@ -59,9 +66,11 @@ public class ListCatalogsAPGRestClientImpl implements IListCatalogsAPGRestClient
 					.exchange(pathServicio, HttpMethod.GET,
 							httpEntity, typeRef, parametrosUrl);	
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.LISTCATALOGS,e,e.getCodigo(),e.getMessage());
 		}
-		logger.debug("listCatalogs :fin");
+		
+		logger.debug("ListCatalogsAPGRestClientImpl listCatalogs: parameters response: " + json.toJson(respuesta));
+		logger.debug("ListCatalogsAPGRestClientImpl listCatalogs :fin");
 		return respuesta.getBody();
 	}	
 }

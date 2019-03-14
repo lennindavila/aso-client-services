@@ -5,5 +5,5 @@ import pe.bbva.aso.servicios.createcredentialsenrollments.dto.RequestCredentials
 import pe.bbva.aso.servicios.createcredentialsenrollments.dto.ResponseCredentialsEnrollments;
 
 public interface ICreateCredentialsEnrollmentsAPGRestClient {	
-	ResponseCredentialsEnrollments createCredentialEnrollment(RequestCredentialsEnrollments filtro, String tsec) throws ServiceExceptionBBVA;
+	ResponseCredentialsEnrollments createCredentialEnrollment(RequestCredentialsEnrollments filtro, String tsec,String contactID) throws ServiceExceptionBBVA;
 }

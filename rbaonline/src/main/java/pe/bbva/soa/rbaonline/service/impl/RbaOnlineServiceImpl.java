@@ -47,17 +47,20 @@ public class RbaOnlineServiceImpl  implements IRbaOnlineService{
 				System.getProperties().put(protocol + ".proxyPort", proxyport);				
 			}
 			wsrba.setOnlineServiceImplPortAddress(url);
+			
+			logger.info("RbaOnlineServiceImpl getConsultaOnline: url " + url);
+			logger.info("RbaOnlineServiceImpl getConsultaOnline: useProxy " + useProxy);
+			logger.info("RbaOnlineServiceImpl getConsultaOnline: proxyhost " + proxyhost);
+			logger.info("RbaOnlineServiceImpl getConsultaOnline: proxyport " + proxyport);
+			logger.info("RbaOnlineServiceImpl getConsultaOnline: protocol " + protocol);				
+			
 			resp = wsrba.getOnlineServiceImplPort().getConsultaOnline(filtro);
 		} catch (RemoteException e) {
 			throw new ConnectionExceptionBBVA(e);
-		} /*catch (ServiceException e) {
-			throw new ServiceExceptionBBVA(e);
-		}*/ catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (ServiceException e) {
+			throw new ConnectionExceptionBBVA(e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ConnectionExceptionBBVA(e);
 		}		
 		return resp;
 	}

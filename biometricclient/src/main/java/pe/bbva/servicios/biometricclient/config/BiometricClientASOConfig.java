@@ -32,9 +32,9 @@ public class BiometricClientASOConfig extends ServiciosASOAutenticadoConfig {
 		logger.debug("BiometricClientASOConfig obtenerBiometrico: inicio");
 		AuthenticateResponse response = null;
 		ctx = new AnnotationConfigApplicationContext(BiometricClientASOConfig.class);
-		BiometricClientController controller = ctx.getBean(BiometricClientController.class);
-		logger.debug("BiometricClientASOConfig obtenerBiometrico: fin");
+		BiometricClientController controller = ctx.getBean(BiometricClientController.class);		
 		response = controller.obtenerBiometrico(request);
+		logger.debug("BiometricClientASOConfig obtenerBiometrico: fin");
 		return response;
 	}
 }

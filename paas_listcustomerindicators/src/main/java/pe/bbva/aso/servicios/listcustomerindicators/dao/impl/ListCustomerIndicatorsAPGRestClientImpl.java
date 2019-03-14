@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -34,11 +37,15 @@ public class ListCustomerIndicatorsAPGRestClientImpl implements IListCustomerInd
 	private CustomRestTemplate restTemplateAutenticado;
 	
 	@Autowired
-	protected Environment env;	
+	protected Environment env;
+	
+	private Gson json = new Gson();
 	
 	@Override
 	public ResponseCustomerIndicators listCustomerIndicators(String customerId, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("listCustomerIndicators :inicio");
+		logger.debug("ListCustomerIndicatorsAPGRestClientImpl listCustomerIndicators :inicio");
+		logger.debug("ListCustomerIndicatorsAPGRestClientImpl listCustomerIndicators: parameters request: " + customerId);
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.listcustomerindicators.url");
 		
 		Map<String, String> parametrosUrl = new HashMap<String, String>();
@@ -57,9 +64,10 @@ public class ListCustomerIndicatorsAPGRestClientImpl implements IListCustomerInd
 					.exchange(pathServicio, HttpMethod.GET,
 							httpEntity, typeRef, parametrosUrl);
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.LISTCUSTOMERINDICATORS,e,e.getCodigo(),e.getMessage());
 		}
-		logger.debug("listCustomerIndicators :fin");
+		logger.debug("ListCustomerIndicatorsAPGRestClientImpl listCustomerIndicators: parameters response: " + json.toJson(respuesta));
+		logger.debug("ListCustomerIndicatorsAPGRestClientImpl listCustomerIndicators :fin");
 		return respuesta.getBody();
 	}	
 }

@@ -27,11 +27,11 @@ public class CreateCredentialsEnrollmentsASOConfig extends ServiciosASOAutentica
 
 	private static AnnotationConfigApplicationContext ctx;
 		
-	public ResponseCredentialsEnrollments createCredentialEnrollment(RequestCredentialsEnrollments filtro,String tsec) throws ServiceExceptionBBVA {
+	public ResponseCredentialsEnrollments createCredentialEnrollment(RequestCredentialsEnrollments filtro,String tsec,String contactID) throws ServiceExceptionBBVA {
 		logger.debug("CreateCredentialsEnrollmentsASOConfig enviar: inicio");
 		ctx = new AnnotationConfigApplicationContext(CreateCredentialsEnrollmentsASOConfig.class);
 		CreateCredentialsEnrollmentsController createCustomerController = ctx.getBean(CreateCredentialsEnrollmentsController.class);
 		logger.debug("CreateCredentialsEnrollmentsASOConfig enviar: fin");
-		return createCustomerController.createCredentialEnrollment(filtro, tsec);
+		return createCustomerController.createCredentialEnrollment(filtro, tsec, contactID);
 	}
 }

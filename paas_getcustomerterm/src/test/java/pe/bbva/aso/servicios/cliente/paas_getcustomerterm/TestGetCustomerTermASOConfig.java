@@ -1,6 +1,6 @@
 package pe.bbva.aso.servicios.cliente.paas_getcustomerterm;
 
-//import org.junit.Test;
+import org.junit.Test;
 
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ValidacionExceptionBBVA;
@@ -12,7 +12,7 @@ import pe.bbva.aso.servicios.grantingticket.config.GrantingTicketASOConfig;
 
 public class TestGetCustomerTermASOConfig {
 	
-	//@Test
+	@Test
 	public void consultar() {
 		String tsec = "";
 		try {
@@ -24,6 +24,9 @@ public class TestGetCustomerTermASOConfig {
 
 		GetCustomerTermASOConfig obj = new GetCustomerTermASOConfig();
 		RequestGetCustomerTerm filtro = new RequestGetCustomerTerm();
+		filtro.setCustomerId("90025131");
+		filtro.setTermId("001");
+		
 		
 		ResponseGetCustomerTerm response = null;
 		CustomerTermDTO data = null;

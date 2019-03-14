@@ -31,7 +31,8 @@ public class ListCatalogsASOConfig extends ServiciosASOAutenticadoConfig {
 		logger.debug("ListCatalogsASOConfig listCatalogs: inicio");
 		ctx = new AnnotationConfigApplicationContext(ListCatalogsASOConfig.class);
 		ListCatalogsController listCatalogsController = ctx.getBean(ListCatalogsController.class);
+		ResponseListCatalogs response = listCatalogsController.listCatalogs(filtro, tsec);
 		logger.debug("ListCatalogsASOConfig listCatalogs: fin");
-		return listCatalogsController.listCatalogs(filtro, tsec);
+		return response;
 	}
 }

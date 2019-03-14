@@ -29,14 +29,15 @@ public class CreateAccountASOConfig extends ServiciosASOAutenticadoConfig {
 	private static AnnotationConfigApplicationContext ctx;
 		
 	public ResponseCreateAccount createAccount(RequestCreateAccount filtro,String tsec) throws ServiceExceptionBBVA {
-		logger.debug("CreateAccountASOConfig enviar: inicio");
+		logger.debug("CreateAccountASOConfig createAccount: inicio");
 		
 		SessionASO.session.put("usuario","lennin");
 		logger.debug("CreateAccountASOConfig enviar: inicio session " + SessionASO.session.get("usuario"));
 		
 		ctx = new AnnotationConfigApplicationContext(CreateAccountASOConfig.class);		
 		CreateAccountController createAccountController = ctx.getBean(CreateAccountController.class);
-		logger.debug("CreateAccountASOConfig enviar: fin");
-		return createAccountController.createAccount(filtro, tsec);
+		ResponseCreateAccount response = createAccountController.createAccount(filtro, tsec);
+		logger.debug("CreateAccountASOConfig createAccount: fin");
+		return response;
 	}
 }

@@ -2,6 +2,8 @@ package pe.bbva.aso.servicios.cliente.paas_listcustomerindicators;
 
 import java.util.List;
 
+import org.junit.Test;
+
 //import org.junit.Test;
 
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
@@ -14,7 +16,7 @@ import pe.bbva.aso.servicios.listcustomerindicators.dto.ResponseCustomerIndicato
 
 public class TestListCustomersIndicatorsASOConfig {
 	
-	//@Test
+	@Test
 	public void consultar() {
 		String tsec = "";
 		try {
@@ -26,7 +28,7 @@ public class TestListCustomersIndicatorsASOConfig {
 
 		ListCustomerIndicatorsASOConfig obj = new ListCustomerIndicatorsASOConfig();
 		RequestListCustomersIndicators filtro = new RequestListCustomersIndicators();
-		filtro.setCustomerId("90014510");
+		filtro.setCustomerId("97163090"); //90014510
 		
 		ResponseCustomerIndicators response = null;
 		List<CustomerIndicatorDTO> data = null;

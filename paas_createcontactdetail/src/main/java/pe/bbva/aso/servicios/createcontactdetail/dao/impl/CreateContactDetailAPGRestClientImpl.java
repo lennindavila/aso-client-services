@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -36,8 +39,12 @@ public class CreateContactDetailAPGRestClientImpl implements ICreateContactDetai
 	@Autowired
 	protected Environment env;
 
+	private Gson json = new Gson();
+	
 	public ResponseCreateContactDetail createContactDetail(RequestCreateContactDetail filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("createContactDetail :inicio");
+		logger.debug("CreateContactDetailAPGRestClientImpl createContactDetail: inicio");
+		logger.debug("CreateContactDetailAPGRestClientImpl createContactDetail: parameters request: " + json.toJson(filtro));
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.createcontactdetail.url");
 						
 		Map<String, String> parametrosUrl = new HashMap<String,String>();
@@ -56,9 +63,11 @@ public class CreateContactDetailAPGRestClientImpl implements ICreateContactDetai
 					.exchange(pathServicio, HttpMethod.POST,
 							httpEntity, typeRef,parametrosUrl);								
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.CREATECONTACTDETAIL,e,e.getCodigo(),e.getMessage());
 		}
-		logger.debug("createContactDetail :fin");
+		
+		logger.debug("CreateContactDetailAPGRestClientImpl createContactDetail: parameters response: " + json.toJson(respuesta));
+		logger.debug("CreateContactDetailAPGRestClientImpl createContactDetail: fin");
 		return respuesta.getBody();	
 	}	
 }

@@ -31,7 +31,8 @@ public class AperturaCuentaGifoleASOConfig extends ServiciosASOAutenticadoConfig
 		logger.debug("AperturaCuentaGifoleASOConfig enviar: inicio");
 		ctx = new AnnotationConfigApplicationContext(AperturaCuentaGifoleASOConfig.class);
 		AperturaCuentaGifoleController aperturaCuentaGifoleController = ctx.getBean(AperturaCuentaGifoleController.class);
+		ResponseAperturaCuentaGifole response = aperturaCuentaGifoleController.aperturaCuentaGifole(filtro);
 		logger.debug("AperturaCuentaGifoleASOConfig enviar: fin");
-		return aperturaCuentaGifoleController.aperturaCuentaGifole(filtro);
+		return response;
 	}
 }

@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -36,8 +39,12 @@ public class GetDigitalAffiliationAPGRestClientImpl implements IGetDigitalAffili
 	@Autowired
 	protected Environment env;
 	
+	private Gson json = new Gson();
+	
 	public ResponseGetDigitalAffiliation getDigitalAffiliation(RequestGetDigitalAffiliation filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("consultarAfiliacionDigital :inicio");
+		logger.debug("GetDigitalAffiliationAPGRestClientImpl getDigitalAffiliation: inicio");
+		logger.debug("GetDigitalAffiliationAPGRestClientImpl getDigitalAffiliation: parameters request: " + json.toJson(filtro));
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.getdigitalaffiliation.url");
 		
 		Map<String, String> parametrosUrl = new HashMap<String, String>();
@@ -56,9 +63,11 @@ public class GetDigitalAffiliationAPGRestClientImpl implements IGetDigitalAffili
 					.exchange(pathServicio, HttpMethod.GET,
 							httpEntity, typeRef, parametrosUrl);
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.GETDIGITALAFFILIATION,e,e.getCodigo(),e.getMessage());
 		}
-		logger.debug("consultarAfiliacionDigital :fin");
+		
+		logger.debug("GetDigitalAffiliationAPGRestClientImpl getDigitalAffiliation: parameters response: " + json.toJson(respuesta));
+		logger.debug("GetDigitalAffiliationAPGRestClientImpl getDigitalAffiliation: fin");
 		return respuesta.getBody();
 	}
 	

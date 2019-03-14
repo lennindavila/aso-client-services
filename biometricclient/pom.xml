@@ -12,7 +12,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>biometricclient</name>
   <url>http://maven.apache.org</url>
-<properties>
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jackson.version>1.9.10</jackson.version>
 		<java.version>1.6</java.version>
@@ -162,6 +162,26 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
-		</plugins>
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-shade-plugin</artifactId>
+			    <executions>
+			        <execution>
+			            <goals>
+			                <goal>shade</goal>
+			            </goals>
+			            <configuration>
+			                <shadedArtifactAttached>true</shadedArtifactAttached>
+			                <transformers>
+			                    <transformer implementation=
+			                      "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+			                        <mainClass>pe.bbva.servicios.biometricclient.config.Start</mainClass>
+			                </transformer>
+			            </transformers>
+			        </configuration>
+			        </execution>
+			    </executions>
+			</plugin>			
+		</plugins>		
 	</build>
 </project>

@@ -13,7 +13,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -33,9 +36,13 @@ public class CreateChannelInformationAPGRestClientImpl implements ICreateChannel
 	@Autowired
 	protected Environment env;
 
+	private Gson json = new Gson();
+	
 	@Override
 	public ResponseCreateChannelInformation createChannelInformation(RequestCreateChannelInformation filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("createChannelInformation :inicio");
+		logger.debug("CreateChannelInformationAPGRestClientImpl createChannelInformation: inicio");
+		logger.debug("CreateChannelInformationAPGRestClientImpl createChannelInformation: parameters request: " + json.toJson(filtro));
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.createchannelinformation.url");
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -51,8 +58,9 @@ public class CreateChannelInformationAPGRestClientImpl implements ICreateChannel
 					.exchange(pathServicio, HttpMethod.POST,
 							httpEntity, typeRef);						
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.CREATECHANNELINFORMATION,e,e.getCodigo(),e.getMessage());
 		}
+		logger.debug("CreateChannelInformationAPGRestClientImpl createChannelInformation: parameters response: " + json.toJson(respuesta));
 		logger.debug("createChannelInformation :fin");
 		return respuesta.getBody();	
 	}	

@@ -16,7 +16,7 @@ public class RequestCreateAccount implements Serializable {
 
 	@JsonProperty("joint")
 	private JointDTO joint;
-
+ 
 	@JsonProperty("offerId")
 	private String offerId;
 

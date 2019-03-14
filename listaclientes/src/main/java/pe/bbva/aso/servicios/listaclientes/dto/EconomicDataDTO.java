@@ -17,6 +17,9 @@ public class EconomicDataDTO implements Serializable {
 
 	@JsonProperty("workplace")
 	private WorkplaceDTO workplace;
+	
+	@JsonProperty("workPlace")
+	private WorkplaceDTO workPlace;	
 
 	public EconomicActivityDTO getEconomicActivity() {
 		return economicActivity;
@@ -39,5 +42,16 @@ public class EconomicDataDTO implements Serializable {
 	public void setWorkplace(WorkplaceDTO workplace) {
 		this.workplace = workplace;
 	}
+
+	public WorkplaceDTO getWorkPlace() {
+		return workPlace;
+	}
+
+	public void setWorkPlace(WorkplaceDTO workPlace) {
+		this.workPlace = workPlace;
+	}
+	
+	
+	
 }
 

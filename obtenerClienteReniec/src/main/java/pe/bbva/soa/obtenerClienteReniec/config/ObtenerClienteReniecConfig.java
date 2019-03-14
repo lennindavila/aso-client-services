@@ -27,17 +27,17 @@ public class ObtenerClienteReniecConfig{
 	private static AnnotationConfigApplicationContext ctx;
 
 	public ConsultaPorDNIResponse consultar(ConsultaPorDNIDTO filtro) {
-		logger.debug("consultar enviar: inicio");
+		logger.debug("ObtenerClienteReniecConfig consultar: inicio");
 		ConsultaPorDNIResponse listCustomers=null;
 		try {
 		ctx = new AnnotationConfigApplicationContext(ObtenerClienteReniecConfig.class);
-		ObtenerClienteReniecController listarClientesController = ctx.getBean(ObtenerClienteReniecController.class);
-		logger.debug("consultar enviar: fin");
+		ObtenerClienteReniecController listarClientesController = ctx.getBean(ObtenerClienteReniecController.class);		
 			listCustomers = listarClientesController.consultar(filtro);
 		} catch (Exception e) {
 			e.printStackTrace();
 			
 		}
+		logger.debug("ObtenerClienteReniecConfig consultar: fin");
 		return listCustomers;
 	}
 }

@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -35,10 +38,14 @@ public class ModifyCardPinAPGRestClientImpl implements IModifyCardPinAPGRestClie
 		
 	@Autowired
 	protected Environment env;
+	
+	private Gson json = new Gson();
 
 	@Override
 	public ResponseModifyCardPin modifyCardPin(String cardId,RequestModifyCardPin filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("modifyCardPin :inicio");
+		logger.debug("ModifyCardPinAPGRestClientImpl modifyCardPin :inicio");
+		logger.debug("ModifyCardPinAPGRestClientImpl modifyCardPin: parameters request: cardId="+ cardId + ", filtro=" + json.toJson(filtro));
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.modifycardpin.url");
 		
 		Map<String, String> parametrosUrl = new HashMap<String, String>();
@@ -57,9 +64,10 @@ public class ModifyCardPinAPGRestClientImpl implements IModifyCardPinAPGRestClie
 					.exchange(pathServicio, HttpMethod.PUT,
 							httpEntity, typeRef,parametrosUrl);	
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.MODIFYCARDPIN,e,e.getCodigo(),e.getMessage());
 		}
-		logger.debug("modifyCardPin :fin");
+		logger.debug("ModifyCardPinAPGRestClientImpl modifyCardPin: parameters response: " + json.toJson(respuesta));
+		logger.debug("ModifyCardPinAPGRestClientImpl modifyCardPin :fin");
 		return respuesta.getBody();
 	}	
 }

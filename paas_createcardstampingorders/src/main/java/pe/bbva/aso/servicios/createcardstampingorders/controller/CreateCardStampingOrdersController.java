@@ -9,6 +9,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ValidacionExceptionBBVA;
 import pe.bbva.aso.servicios.createcardstampingorders.controller.validator.CreateCardStampingOrdersValidator;
@@ -37,7 +38,7 @@ public class CreateCardStampingOrdersController  extends BaseController {
 		Errors errores = new BindException(filtro, filtro.getClass().getName());
 		this.createCardStampingOrdersValidator.validate(filtro, errores);
 		if (errores.hasErrors()) {
-			throw new ValidacionExceptionBBVA(errores, 
+			throw new ValidacionExceptionBBVA(ServiceNameEnum.CREATECARDSTAMPINGORDERS,errores, 
 											  env.getProperty("atm.respuesta.error.general.codigo"),
 											  env.getProperty("atm.respuesta.error.general.validacion.mensaje"));
 		}			

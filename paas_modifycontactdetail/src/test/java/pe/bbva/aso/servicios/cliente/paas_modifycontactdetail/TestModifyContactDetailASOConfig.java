@@ -1,18 +1,19 @@
 package pe.bbva.aso.servicios.cliente.paas_modifycontactdetail;
 
-//import org.junit.Test;
+import org.junit.Test;
 
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ValidacionExceptionBBVA;
 import pe.bbva.aso.servicios.grantingticket.config.GrantingTicketASOConfig;
 import pe.bbva.aso.servicios.modifycontactdetail.config.ModifyContactDetailASOConfig;
 import pe.bbva.aso.servicios.modifycontactdetail.dto.ContactDetailDTO;
+import pe.bbva.aso.servicios.modifycontactdetail.dto.ContactTypeDTO;
 import pe.bbva.aso.servicios.modifycontactdetail.dto.RequestModifyContactDetail;
 import pe.bbva.aso.servicios.modifycontactdetail.dto.ResponseModifyContactDetail;
 
 public class TestModifyContactDetailASOConfig {
 	
-	//@Test
+	@Test
 	public void consultar() {	 
 		String tsec = "";
 		try {
@@ -24,6 +25,16 @@ public class TestModifyContactDetailASOConfig {
 
 		ModifyContactDetailASOConfig obj = new ModifyContactDetailASOConfig();
 		RequestModifyContactDetail filtro = new RequestModifyContactDetail();
+		
+		filtro.setCustomerId("97163090");
+		filtro.setContactDetailId("C001982078451");
+		ContactDetailDTO data1 = new ContactDetailDTO();
+		data1.setContact("982078451");
+		ContactTypeDTO contactType = new ContactTypeDTO();
+		contactType.setId("MOBILE_NUMBER_1");
+		//contactType.setName("MOBILE_NUMBER");
+		data1.setContactType(contactType);
+		filtro.setData(data1);
 		
 		ResponseModifyContactDetail response = null;
 		ContactDetailDTO data = null;

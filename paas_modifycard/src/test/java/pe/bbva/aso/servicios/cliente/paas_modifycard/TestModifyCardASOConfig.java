@@ -18,7 +18,7 @@ public class TestModifyCardASOConfig {
 		try {
 			tsec = new GrantingTicketASOConfig().obtenerTsec();
 		}catch(Exception e) {
-			tsec = "xxx";
+			tsec = "xxx"; 
 		}		
 		System.out.println("tsecxx "+ tsec);	 	
 

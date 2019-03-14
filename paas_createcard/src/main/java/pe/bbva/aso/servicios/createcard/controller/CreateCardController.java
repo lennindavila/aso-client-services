@@ -9,6 +9,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ValidacionExceptionBBVA;
 import pe.bbva.aso.servicios.createcard.controller.validator.CreateCardValidator;
@@ -26,22 +27,22 @@ public class CreateCardController  extends BaseController {
 	
 	@Autowired
 	private ICreateCardService createCardService;
-	
+	/*
 	@Autowired
 	private CreateCardValidator createCardValidator;	
-
+	*/
 	@Override
 	public ResponseCreateCard ejecutar(RequestCreateCard filtro, String tsec) throws ServiceExceptionBBVA {
 		logger.debug("ejecutar: inicio");		
-				
+		/*		
 		Errors errores = new BindException(filtro, filtro.getClass().getName());
 		this.createCardValidator.validate(filtro, errores);
 		if (errores.hasErrors()) {
-			throw new ValidacionExceptionBBVA(errores, 
+			throw new ValidacionExceptionBBVA(ServiceNameEnum.CREATECARD,errores, 
 											  env.getProperty("atm.respuesta.error.general.codigo"),
 											  env.getProperty("atm.respuesta.error.general.validacion.mensaje"));
 		}				
-		
+		*/
 		ResponseCreateCard response = this.createCardService.createCard(filtro, tsec);
 		logger.debug("ejecutar: fin");
 		return response;

@@ -20,8 +20,8 @@ public class CreateCredentialsEnrollmentsServiceImpl  implements ICreateCredenti
 	private ICreateCredentialsEnrollmentsAPGRestClient createCredentialsEnrollmentsAPGRestClient;
 
 	@Override
-	public ResponseCredentialsEnrollments createCredentialEnrollment(RequestCredentialsEnrollments filtro, String tsec) throws ServiceExceptionBBVA {		
-		ResponseCredentialsEnrollments respuesta = createCredentialsEnrollmentsAPGRestClient.createCredentialEnrollment(filtro, tsec);
+	public ResponseCredentialsEnrollments createCredentialEnrollment(RequestCredentialsEnrollments filtro, String tsec,String contactID) throws ServiceExceptionBBVA {		
+		ResponseCredentialsEnrollments respuesta = createCredentialsEnrollmentsAPGRestClient.createCredentialEnrollment(filtro, tsec, contactID);
 		return respuesta;
 	}
 }

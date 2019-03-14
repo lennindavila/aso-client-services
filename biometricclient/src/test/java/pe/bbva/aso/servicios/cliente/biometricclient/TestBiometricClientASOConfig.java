@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.exception.ExceptionUtil;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ValidacionExceptionBBVA;
 import pe.bbva.servicios.biometricclient.config.BiometricClientASOConfig;
@@ -79,15 +80,16 @@ public class TestBiometricClientASOConfig {
 		} catch (ServiceExceptionBBVA e) {
 			if(e instanceof ValidacionExceptionBBVA) {
 				ValidacionExceptionBBVA ev = (ValidacionExceptionBBVA) e;
-				System.out.println("Handling validation exception getCode : " + ev.getErrores().getFieldError().getCode());
-				System.out.println("Handling validation exception getField: " + ev.getErrores().getFieldError().getField());
-				System.out.println("Handling validation exception : " + ev.getErrores().getFieldError().getField() + " " + ev.getErrores().getFieldError().getCode());
+				logger.error("Handling validation exception : " + ExceptionUtil.getStackTrace(ev));
+				logger.error("Handling validation exception getCode : " + ev.getErrores().getFieldError().getCode());
+				logger.error("Handling validation exception getField: " + ev.getErrores().getFieldError().getField());
+				logger.error("Handling validation exception : " + ev.getErrores().getFieldError().getField() + " " + ev.getErrores().getFieldError().getCode());
 			}else {
-				System.out.println("Handling any exception: " + e.getMessage());
+				logger.error("Handling validation exception : " + ExceptionUtil.getStackTrace(e));
 			}		
-			e.printStackTrace();
+			logger.error(ExceptionUtil.getStackTrace(e));
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(ExceptionUtil.getStackTrace(e));
 		}
 	}
 	
@@ -123,7 +125,7 @@ public class TestBiometricClientASOConfig {
 			macAddress = macAddressBuilder.toString();
 		}
 		catch (Exception e) {			
-			logger.error(e.toString());
+			logger.error(ExceptionUtil.getStackTrace(e));
 		}
 		return macAddress;
 	}

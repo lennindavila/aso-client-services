@@ -13,7 +13,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -32,10 +35,14 @@ public class CreateCardAPGRestClientImpl implements ICreateCardAPGRestClient{
 		
 	@Autowired
 	protected Environment env;
+	
+	private Gson json = new Gson();
 
 	@Override
 	public ResponseCreateCard createCard(RequestCreateCard filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("createCard :inicio");
+		logger.debug("CreateCardAPGRestClientImpl createCard: inicio");
+		logger.debug("CreateCardAPGRestClientImpl createCard: parameters request: " + json.toJson(filtro));
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.createcard.url");				
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -49,10 +56,10 @@ public class CreateCardAPGRestClientImpl implements ICreateCardAPGRestClient{
 		try {
 			respuesta = this.restTemplateAutenticado.exchange(pathServicio, HttpMethod.POST,httpEntity, typeRef);
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.CREATECARD,e,e.getCodigo(),e.getMessage());
 		}	
-		
-		logger.debug("createCard :fin");
+		logger.debug("CreateCardAPGRestClientImpl createCard: parameters response: " + json.toJson(respuesta));
+		logger.debug("CreateCardAPGRestClientImpl createCard: fin");
 		return respuesta.getBody();
 	}	
 }

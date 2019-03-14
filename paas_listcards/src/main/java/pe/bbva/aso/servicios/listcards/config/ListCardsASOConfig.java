@@ -31,7 +31,8 @@ public class ListCardsASOConfig extends ServiciosASOAutenticadoConfig {
 		logger.debug("ListCardsASOConfig listCards: inicio");
 		ctx = new AnnotationConfigApplicationContext(ListCardsASOConfig.class);
 		ListCardsController listCardsController = ctx.getBean(ListCardsController.class);
+		ResponseListCards response = listCardsController.listCards(filtro, tsec);
 		logger.debug("ListCardsASOConfig listCards: fin");
-		return listCardsController.listCards(filtro, tsec);
+		return response;
 	}
 }

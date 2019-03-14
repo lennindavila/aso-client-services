@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -36,9 +39,13 @@ public class ListContactDetailAPGRestClientImpl implements IListContactDetailAPG
 	@Autowired
 	protected Environment env;
 	
+	private Gson json = new Gson();
+	
 	@Override
 	public ResponseContactDetailDTO listContactDetail(RequestListContactDetailDTO filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("listContactDetail :inicio");
+		logger.debug("ListContactDetailAPGRestClientImpl listContactDetail :inicio");
+		logger.debug("ListContactDetailAPGRestClientImpl listContactDetail: parameters request: " + json.toJson(filtro));
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.listcontactdetail.url");
 				
 		Map<String, String> parametrosUrl = new HashMap<String, String>();
@@ -57,11 +64,12 @@ public class ListContactDetailAPGRestClientImpl implements IListContactDetailAPG
 			respuesta = this.restTemplateAutenticado
 					.exchange(pathServicio, HttpMethod.GET,httpEntity, typeRef, parametrosUrl);
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.LISTCONTACTDETAIL,e,e.getCodigo(),e.getMessage());
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.debug("listContactDetail :fin");
+		logger.debug("ListContactDetailAPGRestClientImpl listContactDetail: parameters response: " + json.toJson(respuesta));
+		logger.debug("ListContactDetailAPGRestClientImpl listContactDetail :fin");
 		return respuesta.getBody();
 	}
 	

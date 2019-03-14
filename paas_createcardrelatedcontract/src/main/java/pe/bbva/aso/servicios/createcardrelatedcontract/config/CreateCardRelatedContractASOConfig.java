@@ -28,10 +28,11 @@ public class CreateCardRelatedContractASOConfig extends ServiciosASOAutenticadoC
 	private static AnnotationConfigApplicationContext ctx;
 		
 	public ResponseCreateCardRelatedContract createCardRelatedContract(RequestCreateCardRelatedContract filtro,String tsec) throws ServiceExceptionBBVA {
-		logger.debug("CreateCardRelatedContractASOConfig enviar: inicio");
+		logger.debug("CreateCardRelatedContractASOConfig createCardRelatedContract: inicio");
 		ctx = new AnnotationConfigApplicationContext(CreateCardRelatedContractASOConfig.class);
 		CreateCardRelatedContractController createCardRelatedContractController = ctx.getBean(CreateCardRelatedContractController.class);
-		logger.debug("CreateCardRelatedContractASOConfig enviar: fin");
-		return createCardRelatedContractController.createCardRelatedContract(filtro, tsec);
+		ResponseCreateCardRelatedContract respuesta = createCardRelatedContractController.createCardRelatedContract(filtro, tsec);
+		logger.debug("CreateCardRelatedContractASOConfig createCardRelatedContract: fin");
+		return respuesta;
 	}
 }

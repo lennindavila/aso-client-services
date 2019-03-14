@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -35,9 +38,13 @@ public class ModifyIndicatorAPGRestClientImpl implements IModifyIndicatorAPGRest
 	@Autowired
 	protected Environment env;
 
+	private Gson json = new Gson();
+	
 	@Override
 	public ResponseModifyIndicator modifyIndicator(String customerId,String indicatorId,String isActive, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("modifyIndicator :inicio");
+		logger.debug("ModifyIndicatorAPGRestClientImpl modifyIndicator :inicio");
+		logger.debug("ModifyIndicatorAPGRestClientImpl modifyIndicator: parameters request: customerId=" + customerId + ", indicatorId=" + indicatorId + ", isActive=" + isActive);
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.modifyindicator.url");
 		
 		Map<String, String> parametrosUrl = new HashMap<String, String>();
@@ -58,9 +65,10 @@ public class ModifyIndicatorAPGRestClientImpl implements IModifyIndicatorAPGRest
 					.exchange(pathServicio, HttpMethod.PATCH,
 							httpEntity, typeRef,parametrosUrl);	
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.MODIFYINDICATOR,e,e.getCodigo(),e.getMessage());
 		}
-		logger.debug("modifyIndicator :fin");
+		logger.debug("ModifyIndicatorAPGRestClientImpl modifyIndicator: parameters response: " + json.toJson(respuesta));
+		logger.debug("ModifyIndicatorAPGRestClientImpl modifyIndicator :fin");
 		return respuesta.getBody();		
 	}	
 }

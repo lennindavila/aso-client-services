@@ -2,7 +2,7 @@ package pe.bbva.aso.servicios.cliente.paas_listaccounts;
 
 import java.util.List;
 
-//import org.junit.Test;
+import org.junit.Test;
 
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ValidacionExceptionBBVA;
@@ -14,7 +14,7 @@ import pe.bbva.aso.servicios.listaccounts.dto.ResponseListAccounts;
 
 public class TestListAccountsASOConfig {
 	
-	//@Test
+	@Test
 	public void consultar() {
 		String tsec = "";
 		try {
@@ -22,7 +22,7 @@ public class TestListAccountsASOConfig {
 		}catch(Exception e) {
 			tsec = "xxx";
 		}		
-		System.out.println("tsec "+ tsec);	 	
+		System.out.println("tsec "+ tsec);	 	 
 
 		ListAccountsASOConfig obj = new ListAccountsASOConfig();
 		RequestListAccounts filtro = new RequestListAccounts();

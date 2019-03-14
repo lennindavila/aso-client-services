@@ -28,10 +28,11 @@ public class CreateCardASOConfig extends ServiciosASOAutenticadoConfig {
 	private static AnnotationConfigApplicationContext ctx;
 		
 	public ResponseCreateCard createCard(RequestCreateCard filtro,String tsec) throws ServiceExceptionBBVA {
-		logger.debug("CreateCardASOConfig enviar: inicio");
+		logger.debug("CreateCardASOConfig createCard: inicio");
 		ctx = new AnnotationConfigApplicationContext(CreateCardASOConfig.class);
 		CreateCardController createCardController = ctx.getBean(CreateCardController.class);
-		logger.debug("CreateCardASOConfig enviar: fin");
-		return createCardController.createCard(filtro, tsec);
+		ResponseCreateCard response = createCardController.createCard(filtro, tsec);
+		logger.debug("CreateCardASOConfig createCard: fin");
+		return response;
 	}
 }

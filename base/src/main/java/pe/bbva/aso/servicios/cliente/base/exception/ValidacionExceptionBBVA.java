@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import org.springframework.validation.Errors;
 
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
+
 public class ValidacionExceptionBBVA extends ServiceExceptionBBVA implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -23,13 +25,19 @@ public class ValidacionExceptionBBVA extends ServiceExceptionBBVA implements Ser
 		this.setCodigo(codigoError);
 	}
 	
-	public ValidacionExceptionBBVA(Errors errores, String codigoError, String mensaje) {
+	public ValidacionExceptionBBVA(ServiceNameEnum serviceName,Errors errores, String codigoError, String mensaje) {
 		super(codigoError, mensaje);
 		this.errores = errores;
+		super.serviceName = serviceName;
 	}
 
 	public ValidacionExceptionBBVA(String codigoError, String mensaje) {
 		super(codigoError, mensaje);		
+	}
+	
+	public ValidacionExceptionBBVA(ServiceNameEnum serviceName,String codigoError, String mensaje) {
+		super(codigoError, mensaje);
+		super.serviceName = serviceName;
 	}
 
 	public Errors getErrores() {

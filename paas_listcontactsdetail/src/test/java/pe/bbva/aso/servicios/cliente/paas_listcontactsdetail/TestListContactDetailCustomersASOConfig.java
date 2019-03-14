@@ -26,7 +26,7 @@ public class TestListContactDetailCustomersASOConfig {
 
 		ListContactDetailASOConfig obj = new ListContactDetailASOConfig();
 		RequestListContactDetailDTO filtro = new RequestListContactDetailDTO();
-		filtro.setCustomerId("97169969");
+		filtro.setCustomerId("97163090"); 
 		
 		ResponseContactDetailDTO response = null;
 		List<ContactDetailDTO> data = null;

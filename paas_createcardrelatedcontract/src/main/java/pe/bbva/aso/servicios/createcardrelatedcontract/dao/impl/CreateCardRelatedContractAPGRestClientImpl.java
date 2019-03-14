@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -36,9 +39,13 @@ public class CreateCardRelatedContractAPGRestClientImpl implements ICreateCardRe
 	@Autowired
 	protected Environment env;
 
+	private Gson json = new Gson();
+	
 	@Override
 	public ResponseCreateCardRelatedContract createCardRelatedContract(RequestCreateCardRelatedContract filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("createCardRelatedContract :inicio");
+		logger.debug("CreateCardRelatedContractAPGRestClientImpl createCardRelatedContract: inicio");
+		logger.debug("CreateCardRelatedContractAPGRestClientImpl createCardRelatedContract: parameters request: " + json.toJson(filtro));
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.createcardrelatedcontract.url");	
 	
 		Map<String, String> parametrosUrl = new HashMap<String, String>();
@@ -57,8 +64,10 @@ public class CreateCardRelatedContractAPGRestClientImpl implements ICreateCardRe
 					.exchange(pathServicio, HttpMethod.POST,
 							httpEntity, typeRef,parametrosUrl);				
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.CREATECARDRELATEDCONTRACT,e,e.getCodigo(),e.getMessage());
 		}
+		
+		logger.debug("CreateCardRelatedContractAPGRestClientImpl createCardRelatedContract: parameters response: " + json.toJson(respuesta));
 		logger.debug("createCardRelatedContract :fin");
 		return respuesta.getBody();		
 	}	

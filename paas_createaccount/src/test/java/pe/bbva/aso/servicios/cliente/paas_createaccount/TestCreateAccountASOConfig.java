@@ -1,18 +1,20 @@
 package pe.bbva.aso.servicios.cliente.paas_createaccount;
 
-//import org.junit.Test;
+import org.junit.Test;
 
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ValidacionExceptionBBVA;
 import pe.bbva.aso.servicios.createaccount.config.CreateAccountASOConfig;
 import pe.bbva.aso.servicios.createaccount.dto.AccountDTO;
+import pe.bbva.aso.servicios.createaccount.dto.BankDTO;
+import pe.bbva.aso.servicios.createaccount.dto.BranchDTO;
 import pe.bbva.aso.servicios.createaccount.dto.RequestCreateAccount;
 import pe.bbva.aso.servicios.createaccount.dto.ResponseCreateAccount;
 import pe.bbva.aso.servicios.grantingticket.config.GrantingTicketASOConfig;
 
 public class TestCreateAccountASOConfig {
 
-	//@Test
+	@Test
 	public void consultar() {
 		String tsec = "";
 		try {
@@ -24,6 +26,11 @@ public class TestCreateAccountASOConfig {
 
 		CreateAccountASOConfig obj = new CreateAccountASOConfig();
 		RequestCreateAccount filtro = new RequestCreateAccount();
+		BankDTO bank = new BankDTO();
+		BranchDTO branch = new BranchDTO();
+		branch.setBranchId("0486");
+		bank.setBranch(branch);
+		filtro.setBank(bank);
 
 		ResponseCreateAccount response = null;
 		AccountDTO data = null;

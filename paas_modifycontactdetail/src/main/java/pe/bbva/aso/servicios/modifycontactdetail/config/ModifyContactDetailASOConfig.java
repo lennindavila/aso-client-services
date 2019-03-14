@@ -31,7 +31,8 @@ public class ModifyContactDetailASOConfig extends ServiciosASOAutenticadoConfig 
 		logger.debug("ModifyContactDetailASOConfig modifyContactDetail: inicio");
 		ctx = new AnnotationConfigApplicationContext(ModifyContactDetailASOConfig.class);
 		ModifyContactDetailController modifyContactDetailController = ctx.getBean(ModifyContactDetailController.class);
+		ResponseModifyContactDetail response = modifyContactDetailController.modifyContactDetail(filtro, tsec);
 		logger.debug("ModifyContactDetailASOConfig modifyContactDetail: fin");
-		return modifyContactDetailController.modifyContactDetail(filtro, tsec);
+		return response;
 	}
 }

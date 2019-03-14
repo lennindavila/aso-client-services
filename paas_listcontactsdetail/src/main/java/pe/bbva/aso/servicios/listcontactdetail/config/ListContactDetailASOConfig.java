@@ -28,10 +28,11 @@ public class ListContactDetailASOConfig extends ServiciosASOAutenticadoConfig {
 	private static AnnotationConfigApplicationContext ctx;
 	
 	public ResponseContactDetailDTO listContactDetail(RequestListContactDetailDTO filtro,String tsec) throws ServiceExceptionBBVA {
-		logger.debug("ListCustomersASOConfig listContactDetail: inicio");
+		logger.debug("ListContactDetailASOConfig listContactDetail: inicio");
 		ctx = new AnnotationConfigApplicationContext(ListContactDetailASOConfig.class);
 		ListContactDetailController listContactDetailController = ctx.getBean(ListContactDetailController.class);
-		logger.debug("ListCustomersASOConfig listContactDetail: fin");
-		return listContactDetailController.listContactDetail(filtro, tsec);
+		ResponseContactDetailDTO response = listContactDetailController.listContactDetail(filtro, tsec);
+		logger.debug("ListContactDetailASOConfig listContactDetail: fin");
+		return response;
 	}
 }

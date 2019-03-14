@@ -31,7 +31,8 @@ public class ModifyCardPinASOConfig extends ServiciosASOAutenticadoConfig {
 		logger.debug("ModifyCardPinASOConfig modifyCardPin: inicio");
 		ctx = new AnnotationConfigApplicationContext(ModifyCardPinASOConfig.class);
 		ModifyCardPinController modifyCardController = ctx.getBean(ModifyCardPinController.class);
+		ResponseModifyCardPin response = modifyCardController.modifyCardPin(cardId,filtro, tsec);
 		logger.debug("ModifyCardPinASOConfig modifyCardPin: fin");
-		return modifyCardController.modifyCardPin(cardId,filtro, tsec);
+		return response;
 	}
 }

@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -35,10 +38,14 @@ public class AperturaCuentaGifoleAPGRestClientImpl implements IAperturaCuentaGif
 		
 	@Autowired
 	protected Environment env;
+	
+	private Gson json = new Gson();
 
 	@Override
 	public ResponseAperturaCuentaGifole aperturaCuentaGifole(RequestAperturaCuentaGifole filtro) throws ServiceExceptionBBVA {
-		logger.debug("aperturaCuentaGifole :inicio");
+		logger.debug("AperturaCuentaGifoleAPGRestClientImpl aperturaCuentaGifole: inicio");
+		logger.debug("AperturaCuentaGifoleAPGRestClientImpl aperturaCuentaGifole: parameters request: " + json.toJson(filtro));
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.gifole.url");		
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -53,9 +60,10 @@ public class AperturaCuentaGifoleAPGRestClientImpl implements IAperturaCuentaGif
 					.exchange(pathServicio, HttpMethod.POST,
 							httpEntity, typeRef);		
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios Gifole");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.APERTURACUENTAGIFOLE,e,e.getCodigo(),e.getMessage());
 		}
-		logger.debug("aperturaCuentaGifole :fin");
+		logger.debug("AperturaCuentaGifoleAPGRestClientImpl aperturaCuentaGifole: parameters response: " + json.toJson(respuesta));
+		logger.debug("AperturaCuentaGifoleAPGRestClientImpl aperturaCuentaGifole: fin");
 		return respuesta.getBody();
 	}	
 }

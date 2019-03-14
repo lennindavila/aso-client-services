@@ -26,14 +26,15 @@ public class ListCustomersASOConfig extends ServiciosASOAutenticadoConfig {
 	final static Logger logger = (Logger) LoggerFactory.getLogger(ListCustomersASOConfig.class);
 
 	private static AnnotationConfigApplicationContext ctx;
+	public static final String ServiceName = "ListCustomers";
 
 	public ResponseListCustomers consultarCliente(RequestListCustomers filtro, String tsec) throws ServiceExceptionBBVA {
 		logger.debug("ListCustomersASOConfig enviar: inicio");
 		ResponseListCustomers listCustomers = null;
 		ctx = new AnnotationConfigApplicationContext(ListCustomersASOConfig.class);
-		ListarClientesController listarClientesController = ctx.getBean(ListarClientesController.class);
-		logger.debug("ListCustomersASOConfig enviar: fin");
+		ListarClientesController listarClientesController = ctx.getBean(ListarClientesController.class);		
 		listCustomers = listarClientesController.consultarCliente(filtro, tsec);
+		logger.debug("ListCustomersASOConfig enviar: fin");
 		return listCustomers;
 	}
 }

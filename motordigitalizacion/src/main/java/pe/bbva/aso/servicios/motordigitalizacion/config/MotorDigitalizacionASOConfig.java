@@ -32,8 +32,8 @@ public class MotorDigitalizacionASOConfig extends ServiciosASOAutenticadoConfig 
 		try {
 			ctx = new AnnotationConfigApplicationContext(MotorDigitalizacionASOConfig.class);
 			MotorDigitalizacionController motorDigitalizacionController = ctx.getBean(MotorDigitalizacionController.class);
-			logger.debug("MotorDigitalizacionASOConfig envioContrato: fin");
 			response = motorDigitalizacionController.ejecutarEnvioContrato(request);
+			logger.debug("MotorDigitalizacionASOConfig envioContrato: fin");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -46,8 +46,8 @@ public class MotorDigitalizacionASOConfig extends ServiciosASOAutenticadoConfig 
 		try {
 			ctx = new AnnotationConfigApplicationContext(MotorDigitalizacionASOConfig.class);
 			MotorDigitalizacionController motorDigitalizacionController = ctx.getBean(MotorDigitalizacionController.class);
-			logger.debug("MotorDigitalizacionASOConfig generarDocumentos: fin");
 			response = motorDigitalizacionController.ejecutarGenerarDocumentos(request);
+			logger.debug("MotorDigitalizacionASOConfig generarDocumentos: fin");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

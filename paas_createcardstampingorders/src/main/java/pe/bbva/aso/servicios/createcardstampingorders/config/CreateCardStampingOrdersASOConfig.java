@@ -28,10 +28,11 @@ public class CreateCardStampingOrdersASOConfig extends ServiciosASOAutenticadoCo
 	private static AnnotationConfigApplicationContext ctx;
 		
 	public ResponseCreateCardStampingOrders createCardStampingOrders(RequestCreateCardStampingOrders filtro,String tsec) throws ServiceExceptionBBVA {
-		logger.debug("CreateCardStampingOrdersASOConfig enviar: inicio");
+		logger.debug("CreateCardStampingOrdersASOConfig createCardStampingOrders: inicio");
 		ctx = new AnnotationConfigApplicationContext(CreateCardStampingOrdersASOConfig.class);
 		CreateCardStampingOrdersController createCardStampingOrdersController = ctx.getBean(CreateCardStampingOrdersController.class);
-		logger.debug("CreateCardStampingOrdersASOConfig enviar: fin");
-		return createCardStampingOrdersController.createCardStampingOrders(filtro, tsec);
+		ResponseCreateCardStampingOrders respuesta = createCardStampingOrdersController.createCardStampingOrders(filtro, tsec);
+		logger.debug("CreateCardStampingOrdersASOConfig createCardStampingOrders: fin");
+		return respuesta;
 	}
 }

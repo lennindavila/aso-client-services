@@ -28,11 +28,11 @@ public class ModifyCardASOConfig extends ServiciosASOAutenticadoConfig {
 	private static AnnotationConfigApplicationContext ctx;
 
 	public ResponseModifyCard modifyCard(RequestModifyCard filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("ModifyCardASOConfig modifyCard: inicio 897");
-		
+		logger.debug("ModifyCardASOConfig modifyCard: inicio");		
 		ctx = new AnnotationConfigApplicationContext(ModifyCardASOConfig.class);
 		ModifyCardController modifyCardController = ctx.getBean(ModifyCardController.class);
+		ResponseModifyCard response = modifyCardController.modifyCard(filtro, tsec);
 		logger.debug("ModifyCardASOConfig modifyCard: fin");
-		return modifyCardController.modifyCard(filtro, tsec);
+		return response;
 	}
 }

@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -36,11 +39,14 @@ public class CreateAccountRelatedContractAPGRestClientImpl implements ICreateAcc
 	@Autowired
 	protected Environment env;
 
+	private Gson json = new Gson();
+	
 	@Override
 	public ResponseCreateAccountRelatedContract createAccountRelatedContract(RequestCreateAccountRelatedContract filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("createAccountRelatedContract :inicio xxx");
-		String pathServicio = env.getProperty("paas.servicio.rest.createaccountrelatedcontract.url");
+		logger.debug("CreateAccountRelatedContractAPGRestClientImpl createAccountRelatedContract: inicio");
+		logger.debug("CreateAccountRelatedContractAPGRestClientImpl createAccountRelatedContract: parameters request: " + json.toJson(filtro));
 		
+		String pathServicio = env.getProperty("paas.servicio.rest.createaccountrelatedcontract.url");		
 			
 		Map<String, String> parametrosUrl = new HashMap<String, String>();
 		parametrosUrl.put("account-id", filtro.getAccountId());
@@ -60,9 +66,11 @@ public class CreateAccountRelatedContractAPGRestClientImpl implements ICreateAcc
 															  typeRef, 
 															  parametrosUrl);		
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.CREATEACCOUNTRELATEDCONTRACT,e,e.getCodigo(),e.getMessage());
 		}
-		logger.debug("createAccountRelatedContract :fin");
+		
+		logger.debug("CreateAccountRelatedContractAPGRestClientImpl createAccountRelatedContract: parameters response: " + json.toJson(respuesta));
+		logger.debug("CreateAccountRelatedContractAPGRestClientImpl createAccountRelatedContract: fin");
 		return respuesta.getBody();
 		
 	}	

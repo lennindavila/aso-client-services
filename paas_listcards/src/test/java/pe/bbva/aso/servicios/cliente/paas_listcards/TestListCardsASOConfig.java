@@ -17,7 +17,7 @@ public class TestListCardsASOConfig {
 	
     @Test
 	public void consultar() {
-		String tsec = "";
+		String tsec = ""; 
 		try {
 			tsec = new GrantingTicketASOConfig().obtenerTsec();
 		}catch(Exception e) {
@@ -28,13 +28,14 @@ public class TestListCardsASOConfig {
 		ListCardsASOConfig obj = new ListCardsASOConfig();
 		RequestListCards filtro = new RequestListCards();
 		CustomerDTO customer = new CustomerDTO();
-		customer.setId("46995525");
+		customer.setId("97163089");//97170203  97163086
 		filtro.setCustomer(customer);
 
 		ResponseListCards response = null;
 		List<CardsDTO> data = null;
 		try {
 		 response = obj.listCards(filtro, tsec);
+		 System.out.println(" exito : ");
 		 if(response!=null) {
 			 if(!response.hasError()) {
 				 data = response.getData();

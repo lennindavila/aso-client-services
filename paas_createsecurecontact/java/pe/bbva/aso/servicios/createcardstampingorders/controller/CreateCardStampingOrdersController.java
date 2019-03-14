@@ -37,7 +37,7 @@ public class CreateCardStampingOrdersController  extends BaseController {
 		Errors errores = new BindException(filtro, filtro.getClass().getName());
 		this.createCardStampingOrdersValidator.validate(filtro, errores);
 		if (errores.hasErrors()) {
-			throw new ValidacionExceptionBBVA(errores, 
+			throw new ValidacionExceptionBBVA(0,errores, 
 											  env.getProperty("atm.respuesta.error.general.codigo"),
 											  env.getProperty("atm.respuesta.error.general.validacion.mensaje"));
 		}			

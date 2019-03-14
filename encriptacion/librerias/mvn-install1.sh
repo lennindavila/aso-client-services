@@ -1,0 +1,1 @@
+mvn install:install-file "-Dfile=./libmcrypt-core-1.5.1.jar" "-DgroupId=com.bbva.sl.ar.core" "-DartifactId=libmcrypt-core" "-Dversion=1.5.1" "-Dpackaging=jar"

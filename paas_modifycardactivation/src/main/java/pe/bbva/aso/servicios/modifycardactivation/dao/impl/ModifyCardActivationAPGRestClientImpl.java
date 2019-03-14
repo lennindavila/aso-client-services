@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -35,9 +38,13 @@ public class ModifyCardActivationAPGRestClientImpl implements IModifyCardActivat
 	@Autowired
 	protected Environment env;
 
+	private Gson json = new Gson();
+	
 	@Override
 	public ResponseModifyCardActivation modifyCardActivation(String cardId,String activationId,String isActive, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("modifyCardActivation :inicio");
+		logger.debug("ModifyCardActivationAPGRestClientImpl modifyCardActivation :inicio");
+		logger.debug("ModifyCardActivationAPGRestClientImpl modifyCardActivation: parameters request: cardId=" + cardId + ", activationId=" + activationId + ", isActive=" + isActive);
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.modifycardactivation.url");
 		
 		Map<String, String> parametrosUrl = new HashMap<String, String>();
@@ -55,9 +62,10 @@ public class ModifyCardActivationAPGRestClientImpl implements IModifyCardActivat
 		try {
 			respuesta = this.restTemplateAutenticado.exchange(pathServicio, HttpMethod.PATCH,httpEntity, typeRef, parametrosUrl);	
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.MODIFYCARDACTIVATION,e,e.getCodigo(),e.getMessage());
 		}
-		logger.debug("modifyCardActivation :fin");
+		logger.debug("ModifyCardActivationAPGRestClientImpl modifyCardActivation: parameters response: " + json.toJson(respuesta));
+		logger.debug("ModifyCardActivationAPGRestClientImpl modifyCardActivation :fin");
 		return respuesta.getBody();
 	}	
 }

@@ -31,8 +31,8 @@ public class ModifyCardActivationASOConfig extends ServiciosASOAutenticadoConfig
 		logger.debug("ModifyCardActivationASOConfig modifyCardActivation: inicio");
 		ctx = new AnnotationConfigApplicationContext(ModifyCardActivationASOConfig.class);
 		ModifyCardActivationController modifyIndicatorController = ctx.getBean(ModifyCardActivationController.class);
-		logger.debug("ModifyCardActivationASOConfig modifyCardActivation: fin");
 		ResponseModifyCardActivation respuesta = modifyIndicatorController.modifyCardActivation(filtro, tsec);
+		logger.debug("ModifyCardActivationASOConfig modifyCardActivation: fin");
 		return respuesta;
 	}
 }

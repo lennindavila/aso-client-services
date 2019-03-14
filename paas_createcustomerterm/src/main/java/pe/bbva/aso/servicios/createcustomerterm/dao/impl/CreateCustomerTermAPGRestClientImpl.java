@@ -16,7 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.Gson;
+
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ConnectionExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.resttemplate.CustomRestTemplate;
@@ -35,10 +38,14 @@ public class CreateCustomerTermAPGRestClientImpl implements ICreateCustomerTermA
 		
 	@Autowired
 	protected Environment env;
+	
+	private Gson json = new Gson();
 
 	@Override
 	public ResponseCreateCustomerTerm createCustomerTerm(RequestCreateCustomerTerm filtro, String tsec) throws ServiceExceptionBBVA {
-		logger.debug("createCustomerTerm :inicio");
+		logger.debug("CreateCustomerTermAPGRestClientImpl createCustomerTerm: inicio");
+		logger.debug("CreateCustomerTermAPGRestClientImpl createCustomerTerm: parameters request: " + json.toJson(filtro));
+		
 		String pathServicio = env.getProperty("paas.servicio.rest.createcustomerterm.url");		
 		
 		Map<String, String> parametrosUrl = new HashMap<String, String>();
@@ -57,9 +64,11 @@ public class CreateCustomerTermAPGRestClientImpl implements ICreateCustomerTermA
 					.exchange(pathServicio, HttpMethod.POST,
 							httpEntity, typeRef,parametrosUrl);		
 		}catch(ConnectionExceptionBBVA e) {
-			throw new ServiceExceptionBBVA(e,"Error al intentar Conectar con Servicios ASO");
+			throw new ServiceExceptionBBVA(ServiceNameEnum.CREATECUSTOMERTERM,e,e.getCodigo(),e.getMessage());
 		}
-		logger.debug("createCustomerTerm :fin");
+		
+		logger.debug("CreateCustomerTermAPGRestClientImpl createCustomerTerm: parameters response: " + json.toJson(respuesta));
+		logger.debug("CreateCustomerTermAPGRestClientImpl createCustomerTerm: fin");
 		return respuesta.getBody();
 	}	
 }

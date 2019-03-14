@@ -9,6 +9,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 
 import ch.qos.logback.classic.Logger;
+import pe.bbva.aso.servicios.cliente.base.enumerators.ServiceNameEnum;
 import pe.bbva.aso.servicios.cliente.base.exception.ServiceExceptionBBVA;
 import pe.bbva.aso.servicios.cliente.base.exception.ValidacionExceptionBBVA;
 import pe.bbva.aso.servicios.createcredentialsenrollments.controller.validator.CreateCredentialsEnrollmentsValidator;
@@ -31,18 +32,18 @@ public class CreateCredentialsEnrollmentsController  extends BaseController {
 	private CreateCredentialsEnrollmentsValidator createCredentialsEnrollmentsValidator;	
 
 	@Override
-	ResponseCredentialsEnrollments ejecutar(RequestCredentialsEnrollments filtro, String tsec) throws ServiceExceptionBBVA {
+	ResponseCredentialsEnrollments ejecutar(RequestCredentialsEnrollments filtro, String tsec,String contactID) throws ServiceExceptionBBVA {
 		logger.debug("ejecutar: inicio");
 		
 		Errors errores = new BindException(filtro, filtro.getClass().getName());
 		this.createCredentialsEnrollmentsValidator.validate(filtro, errores);
 		if (errores.hasErrors()) {
-			throw new ValidacionExceptionBBVA(errores, 
+			throw new ValidacionExceptionBBVA(ServiceNameEnum.CREATECREDENTIALSENROLLMENTS,errores, 
 											  env.getProperty("atm.respuesta.error.general.codigo"),
 											  env.getProperty("atm.respuesta.error.general.validacion.mensaje"));
 		}		
 		
-		ResponseCredentialsEnrollments response = this.createCredentialsEnrollmentsService.createCredentialEnrollment(filtro, tsec);
+		ResponseCredentialsEnrollments response = this.createCredentialsEnrollmentsService.createCredentialEnrollment(filtro, tsec, contactID);
 		logger.debug("ejecutar: fin");
 		return response;
 	}

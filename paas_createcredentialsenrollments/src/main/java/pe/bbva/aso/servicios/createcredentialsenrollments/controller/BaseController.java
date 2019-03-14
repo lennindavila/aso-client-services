@@ -10,13 +10,13 @@ import pe.bbva.aso.servicios.createcredentialsenrollments.dto.ResponseCredential
 public abstract class BaseController {
 	Logger logger = (Logger) LoggerFactory.getLogger(getClass());	
 
-	public ResponseCredentialsEnrollments createCredentialEnrollment(RequestCredentialsEnrollments filtro,String tsec) throws ServiceExceptionBBVA {
+	public ResponseCredentialsEnrollments createCredentialEnrollment(RequestCredentialsEnrollments filtro,String tsec,String contactID) throws ServiceExceptionBBVA {
 		logger.debug("CreateCredentialsEnrollmentsController createCredentialEnrollment: inicio");
-		ResponseCredentialsEnrollments response = this.ejecutar(filtro, tsec);
+		ResponseCredentialsEnrollments response = this.ejecutar(filtro, tsec, contactID);
 		logger.debug("CreateCredentialsEnrollmentsController: fin");
 		return response;
 	}
 	
-	abstract ResponseCredentialsEnrollments ejecutar(RequestCredentialsEnrollments filtro,String tsec) throws ServiceExceptionBBVA ;
+	abstract ResponseCredentialsEnrollments ejecutar(RequestCredentialsEnrollments filtro,String tsec,String contactID) throws ServiceExceptionBBVA ;
 	
 }

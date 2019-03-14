@@ -28,10 +28,11 @@ public class CreateAccountRelatedContractASOConfig extends ServiciosASOAutentica
 	private static AnnotationConfigApplicationContext ctx;
 		
 	public ResponseCreateAccountRelatedContract createAccountRelatedContract(RequestCreateAccountRelatedContract filtro,String tsec) throws ServiceExceptionBBVA {
-		logger.debug("CreateAccountRelatedContractASOConfig enviar: inicio");
+		logger.debug("CreateAccountRelatedContractASOConfig createAccountRelatedContract: inicio");
 		ctx = new AnnotationConfigApplicationContext(CreateAccountRelatedContractASOConfig.class);
 		CreateAccountRelatedContractController createAccountRelatedContractController = ctx.getBean(CreateAccountRelatedContractController.class);
-		logger.debug("CreateAccountRelatedContractASOConfig enviar: fin");
-		return createAccountRelatedContractController.createAccountRelatedContract(filtro, tsec);
+		ResponseCreateAccountRelatedContract response = createAccountRelatedContractController.createAccountRelatedContract(filtro, tsec);
+		logger.debug("CreateAccountRelatedContractASOConfig createAccountRelatedContract: fin");
+		return response;
 	}
 }
